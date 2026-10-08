@@ -32,8 +32,8 @@ compile_commands.json
 *.log
 *.pid
 *.sock
-core
-core.*
+/core
+/core.*
 
 # ---------- 系统 ----------
 .DS_Store
