@@ -1,0 +1,44 @@
+# ---------- 编译产物 ----------
+*.o
+*.a
+*.so
+*.so.*
+*.d
+*.out
+*.exe
+
+# 没有扩展名的可执行文件（本仓库示例程序的名字）
+tcp_echo_server
+tcp_echo_client
+udp_echo_server
+udp_echo_client
+web_server
+
+# ---------- 构建目录 ----------
+build/
+cmake-build-*/
+.cache/
+compile_commands.json
+
+# ---------- 编辑器 / IDE ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.clangd/
+
+# ---------- 运行期产物 ----------
+*.log
+*.pid
+*.sock
+core
+core.*
+
+# ---------- 系统 ----------
+.DS_Store
+Thumbs.db
+
+# ---------- 本地私有配置（不要提交自己的测试参数） ----------
+.env
+local/
