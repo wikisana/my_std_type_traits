@@ -7,7 +7,6 @@
 #include "my_std/type_traits/transformations/remove_cv.hpp"
 #include <cstddef>
 
-// to do: add cv version for each fundamental
 namespace my_std {
 
 template <typename T, typename = void>
@@ -15,7 +14,7 @@ struct is_void : false_type{};
 template <typename T>
 struct is_void <T, enable_if_t<is_same_v<remove_cv_t<T>, void>>>: true_type{};
 template <typename T>
-inline constexpr bool is_void_t = is_void<T>::value;
+inline constexpr bool is_void_v = is_void<T>::value;
 
 template <typename T, typename = void>
 struct is_null_pointer: false_type{};
@@ -94,7 +93,7 @@ inline constexpr bool is_arithmetic_v = is_arithmetic<T>::value;
 template <typename T, typename = void>
 struct is_fundamental: false_type{};
 template <typename T>
-struct is_fundamental<T, enable_if_t<is_void_t<T> || is_arithmetic_v<T> || is_null_pointer_v<T>>>: true_type{};
+struct is_fundamental<T, enable_if_t<is_void_v<T> || is_arithmetic_v<T> || is_null_pointer_v<T>>>: true_type{};
 template <typename T>
 inline constexpr bool is_fundamental_v = is_fundamental<T>::value;
 

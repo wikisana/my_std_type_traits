@@ -18,6 +18,9 @@ struct integral_constant{
     }
 };
 
+template <bool V>
+using bool_constant = integral_constant<bool, V>;
+
 using false_type = integral_constant<bool, false>;
 using true_type = integral_constant<bool, true>;
 
