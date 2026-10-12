@@ -1,26 +1,34 @@
 # TODO
 
-## 下一步：补齐 cv 添加变换
+## 已完成
 
-优先实现 `my_std/type_traits/transformations/add_cv.hpp`：
+- `add_const`、`add_volatile`、`add_cv` 及其 `_t` 别名
+- `add_lvalue_reference`、`add_rvalue_reference` 及其 `_t` 别名
+- `remove_pointer`、`add_pointer` 及其 `_t` 别名
+- `remove_extent`、`remove_all_extents` 及其 `_t` 别名
+- `is_object_v`、`is_scalar_v`、`is_compound_v`
+- `void_t` 基础检测工具
+- 上述 transformations 对普通类型、cv、引用、数组、函数和 `void` 的标准库对照测试
 
-- `add_const` / `add_const_t`
-- `add_volatile` / `add_volatile_t`
-- `add_cv` / `add_cv_t`
-- 对普通类型、数组、函数和引用分别与 `std::type_traits` 对照测试
-- 确保引用类型不会被错误地添加 cv 限定
+## 下一步：实现 decay
 
-选择它作为下一步，是因为实现规模小，并且能与已经完成的
-`remove_const`、`remove_volatile` 和 `remove_cv` 形成完整的一组基础变换。
+优先实现 `my_std/type_traits/transformations/decay.hpp`：
+
+- 先令 `U = remove_reference_t<T>`
+- 若 `U` 是数组，结果为 `add_pointer_t<remove_extent_t<U>>`
+- 若 `U` 是函数，结果为 `add_pointer_t<U>`
+- 其他情况结果为 `remove_cv_t<U>`
+- 提供 `decay_t<T>`
+- 与 `std::decay` 对照普通类型、cv/ref、数组和函数
+
+现有的 remove/add cv、reference、pointer、extent 和类型查询已经满足
+`decay` 的主要依赖，因此它适合作为下一步的组合型 trait。
 
 ## 后续顺序
 
-1. 实现 `add_reference.hpp`，覆盖 `void` 等无法形成引用的类型。
-2. 实现 transformations 下的 `pointer.hpp`：`remove_pointer` 和 `add_pointer`。
-3. 实现 transformations 下的 `array.hpp`：`remove_extent` 和 `remove_all_extents`。
-4. 为 `is_object`、`is_scalar`、`is_compound` 补齐对应的 `_v` 变量模板。
-5. 将根目录测试拆成按模块组织的测试文件，并同时覆盖正例、反例和 cv/ref 边界。
-6. 完成 queries 后，再实现 constructible、assignable、destructible 和 invoke_result。
+1. 实现 `sign.hpp`：`make_signed` 和 `make_unsigned`。
+2. 将根目录测试拆成按模块组织的测试文件，并覆盖正例、反例和 cv/ref 边界。
+3. 完成 queries 后，再实现 constructible、assignable、destructible 和 invoke_result。
 
 ## 每个模块的验收标准
 

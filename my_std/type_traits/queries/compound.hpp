@@ -41,12 +41,20 @@ struct is_object : false_type{};
 
 template <typename T>
 struct is_object<T, enable_if_t<!is_function_v<T> && !is_reference_v<T> && !is_void_v<T>>> : true_type{};
+template <typename T>
+inline constexpr bool is_object_v = is_object<T>::value;
+
 
 template<typename T>
 struct is_scalar :bool_constant<is_arithmetic_v<T> || is_enum_v<T> || is_pointer_v<T> || is_member_pointer_v<T> || is_null_pointer_v<T>>{};
+template <typename T>
+inline constexpr bool is_scalar_v = is_scalar<T>::value;
 
 template <typename T>
 struct is_compound : bool_constant<!is_fundamental_v<T>> {};
+
+template <typename T>
+inline constexpr bool is_compound_v = is_compound<T>::value;
 
 }  // namespace my_std
 

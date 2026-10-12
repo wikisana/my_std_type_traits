@@ -5,6 +5,7 @@
 #include <my_std/type_traits/core/enable_if.hpp>
 #include <my_std/type_traits/core/integral_constant.hpp>
 #include <my_std/type_traits/core/type_identity.hpp>
+#include <my_std/type_traits/core/void_t.hpp>
 #include <my_std/type_traits/operations/assignable.hpp>
 #include <my_std/type_traits/operations/constructible.hpp>
 #include <my_std/type_traits/operations/destructible.hpp>
